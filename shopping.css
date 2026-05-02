@@ -1,0 +1,63 @@
+/* Material Symbols Configuration */
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* Body Font */
+body {
+    font-family: "Manrope", "Noto Sans Arabic", sans-serif;
+}
+
+/* Egyptian Pattern Background */
+.egyptian-pattern {
+    background-image: radial-gradient(circle at 2px 2px, #393528 1px, transparent 0);
+    background-size: 24px 24px;
+    opacity: 0.1;
+}
+
+
+/* Gold Border Gradient Effect */
+.gold-border-gradient {
+    border: 1px solid transparent;
+    background: linear-gradient(#1a1814, #1a1814) padding-box, 
+                linear-gradient(to bottom right, #ecb613, #393528) border-box;
+}
+
+/* Old Kingdom Background */
+.bg-old-kingdom {
+    background-image: linear-gradient(to bottom, rgba(26, 24, 20, 0.4), rgba(10, 10, 10, 0.95)), 
+    url(../imge/bg-photoStore1.png);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Middle Kingdom Background */
+.bg-middle-kingdom {
+    background-image: linear-gradient(to bottom, rgba(0, 206, 209, 0.1), rgba(10, 10, 10, 0.95)), 
+    url(../imge/bg-photoStor2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+
+
+
+
+
+/* Scrollbar Hiding - For Webkit Browsers */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Scrollbar Hiding - For Firefox */
+html {
+    scrollbar-width: none;
+}
+
+/* Scrollbar Hiding - For IE/Edge */
+body {
+    -ms-overflow-style: none;
+    min-height: auto !important;
+}

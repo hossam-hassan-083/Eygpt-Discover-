@@ -1,0 +1,414 @@
+    <!DOCTYPE html>
+    <html class="dark" lang="en"><head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Artifact Orders</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "surface-dim": "#131313",
+                            "primary": "#f2ca50",
+                            "on-primary-fixed-variant": "#574500",
+                            "outline": "#99907c",
+                            "on-secondary-fixed-variant": "#1f477b",
+                            "surface-container-high": "#2a2a2a",
+                            "on-surface-variant": "#d0c5af",
+                            "surface-container-low": "#1c1b1b",
+                            "on-surface": "#e5e2e1",
+                            "error-container": "#93000a",
+                            "tertiary-fixed": "#dbe1ff",
+                            "on-tertiary-fixed": "#00174b",
+                            "primary-container": "#d4af37",
+                            "tertiary-fixed-dim": "#b4c5ff",
+                            "on-tertiary-container": "#254188",
+                            "on-tertiary-fixed-variant": "#27438a",
+                            "surface-container-highest": "#353534",
+                            "secondary": "#a7c8ff",
+                            "on-background": "#e5e2e1",
+                            "on-error": "#690005",
+                            "tertiary": "#bfcdff",
+                            "error": "#ffb4ab",
+                            "surface-tint": "#e9c349",
+                            "surface-container": "#201f1f",
+                            "on-secondary": "#003061",
+                            "on-secondary-container": "#93b6f1",
+                            "on-secondary-fixed": "#001b3c",
+                            "on-primary-container": "#554300",
+                            "inverse-surface": "#e5e2e1",
+                            "primary-fixed-dim": "#e9c349",
+                            "secondary-container": "#1f477b",
+                            "inverse-on-surface": "#313030",
+                            "outline-variant": "#4d4635",
+                            "surface-container-lowest": "#0e0e0e",
+                            "tertiary-container": "#97b0ff",
+                            "secondary-fixed": "#d5e3ff",
+                            "inverse-primary": "#735c00",
+                            "background": "#131313",
+                            "primary-fixed": "#ffe088",
+                            "on-primary": "#3c2f00",
+                            "surface": "#131313",
+                            "on-tertiary": "#082b72",
+                            "surface-bright": "#3a3939",
+                            "surface-variant": "#353534",
+                            "on-primary-fixed": "#241a00",
+                            "secondary-fixed-dim": "#a7c8ff",
+                            "on-error-container": "#ffdad6"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                        },
+                        "fontFamily": {
+                            "headline": ["Noto Serif"],
+                            "body": ["Manrope"],
+                            "label": ["Manrope"]
+                        }
+                    },
+                },
+            }
+        </script>
+
+
+
+
+    <style>.material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+        }
+    body {
+        font-family: "Manrope", sans-serif;
+        background-color: #0e0e0e;
+        color: #e5e2e1
+        }
+    .font-serif {
+        font-family: "Noto Serif", serif
+        }
+    .glass-nav {
+        backdrop-filter: blur(24px)
+        }
+    .gold-gradient {
+        background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%)
+        }
+    .ghost-border {
+        border: 1px solid rgba(77, 70, 53, 0.2)
+        }
+    .hieroglyph-overlay {
+        background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCwmbHPHZxnCvqWYFw1YPSK4vcHMmWFN8EOMOyxLmHxyIN0FeJNoVBGQjGkOAyIHc0BoYbt-GQY9Im0tTfnpc5KoDtL36aqG8wa_NGNy4JuWUtX4GerAmiVXWD7YzzyHEo-d7tNftL7L-dUD7QYJbVSeLGswqTnCUTx7jMqzn8Bl6qg3mYNawHdV2xt0pjGyz9gScu6OUu7o3px5wrXD8DZCwIGNhB6gQXaWmVnMe8cdBG2nJC5G2debTvWvgSR3YGXL94L37fi1uwh);
+        opacity: 0.03
+        }
+
+    </style>
+
+
+
+    <style data-injected="">
+    /* For Webkit Browsers (Chrome, Safari, Edge) */
+    body::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* For Firefox */
+    html {
+        scrollbar-width: none;
+    }
+
+    /* For IE/Edge */
+    body {
+        -ms-overflow-style: none;
+        min-height: auto !important;
+    }
+    </style>
+
+
+
+
+
+
+
+    <!-- <style id="spin-keyframes"> -->
+    @keyframes spin {
+        from {
+        transform: rotate(0deg);
+        }
+        to {
+        transform: rotate(360deg);
+        }
+    }
+    <!-- </style> -->
+
+
+
+
+
+
+
+        
+    </head>
+
+
+
+    <body class="overflow-hidden">
+    <!-- SideNavBar Shell -->
+    <aside class="h-[884px] w-64 fixed left-0 top-0 bg-stone-950/70 backdrop-blur-xl border-r border-stone-800/20 shadow-[0_0_32px_rgba(212,175,55,0.08)] flex flex-col py-8 z-50" data-stitch-vh="h-[884px]===h-screen">
+    <div class="px-8 mb-12">
+    <h1 class="text-xl font-bold text-amber-400 tracking-tighter uppercase font-serif">Imperial Curator</h1>
+    <p class="text-[10px] tracking-[0.2em] text-stone-500 uppercase font-bold mt-1">Grand Curator</p>
+    </div>
+    <nav class="flex-1 space-y-1">
+    <a class="flex items-center px-8 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-amber-200 transition-colors group" href="#">
+    <span class="material-symbols-outlined mr-4 text-sm" data-icon="dashboard">dashboard</span>
+    <span class="text-xs tracking-widest uppercase font-bold">Overview</span>
+    </a>
+    <a class="flex items-center px-8 py-3 text-amber-400 font-bold border-l-2 border-amber-400 bg-stone-800/30" href="#">
+    <span class="material-symbols-outlined mr-4 text-sm" data-icon="museum">museum</span>
+    <span class="text-xs tracking-widest uppercase">Orders</span>
+    </a>
+    <a class="flex items-center px-8 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-amber-200 transition-colors" href="#">
+    <span class="material-symbols-outlined mr-4 text-sm" data-icon="event_available">event_available</span>
+    <span class="text-xs tracking-widest uppercase">Bookings</span>
+    </a>
+    <a class="flex items-center px-8 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-amber-200 transition-colors" href="#">
+    <span class="material-symbols-outlined mr-4 text-sm" data-icon="group">group</span>
+    <span class="text-xs tracking-widest uppercase">Users</span>
+    </a>
+    <a class="flex items-center px-8 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-amber-200 transition-colors" href="#">
+    <span class="material-symbols-outlined mr-4 text-sm" data-icon="analytics">analytics</span>
+    <span class="text-xs tracking-widest uppercase">Reports</span>
+    </a>
+    <a class="flex items-center px-8 py-3 text-stone-400 hover:bg-stone-800/50 hover:text-amber-200 transition-colors" href="#">
+    <span class="material-symbols-outlined mr-4 text-sm" data-icon="settings">settings</span>
+    <span class="text-xs tracking-widest uppercase">Settings</span>
+    </a>
+    </nav>
+    <div class="px-8 mt-auto pt-8 border-t border-stone-800/20">
+    <button class="flex items-center text-stone-400 hover:text-amber-200 transition-colors">
+    <span class="material-symbols-outlined mr-4 text-sm" data-icon="language">language</span>
+    <span class="text-xs tracking-widest uppercase font-bold">AR/EN</span>
+    </button>
+    </div>
+    </aside>
+    
+                                                    <!-- Main Content Wrapper -->
+    <div class="ml-64 flex flex-col min-h-[884px]" data-stitch-vh="min-h-[884px]===min-h-screen">
+    <!-- TopNavBar Shell -->
+    <header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-20 bg-stone-950/70 backdrop-blur-2xl border-b border-stone-800/20 flex justify-between items-center px-12 z-40">
+    <div class="flex items-center flex-1 max-w-xl">
+    <div class="relative w-full">
+    <span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-stone-500 text-lg" data-icon="search">search</span>
+    <input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface w-full pl-8 placeholder-stone-600 font-body" placeholder="Search archives..." type="text">
+    </div>
+    </div>
+    <div class="flex items-center space-x-8">
+    <button class="text-stone-400 hover:text-amber-200 transition-all focus:ring-1 focus:ring-amber-500/30">
+    <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+    </button>
+    <div class="flex items-center space-x-4 pl-8 border-l border-stone-800/20">
+    <div class="text-right">
+    <p class="text-xs font-bold text-on-surface leading-none">Grand Curator</p>
+    <p class="text-[10px] text-amber-400 tracking-wider uppercase mt-1">Level VII</p>
+    </div>
+    <img alt="Grand Curator Portrait" class="w-10 h-10 rounded-full border border-amber-400/30 object-cover" data-alt="dramatic portrait of a middle-aged man with sharp features and professional attire, studio lighting against a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG21lG5HW-bAhgdoGsa5ijrfX_vGF9tWgc0d7r39Q2s4UzEAYwTt4BO7rbPZvHPsSE6q-LiMuL2hcW6A86kblSBh3_XRU5gkRJfTxrcgFOw-mpl1BY5lFKgIyC92J3YN5Nunx9i0MMbuunvBBIUiYoWuDymQ8HV4zm4c9OcKv2LhWMYwd7_mZdly2B9e5ZB7d7UCIlygCEsSFEB9oFyLrPyRhA7iDplysnZKjNH4CCSF3QX-xeW-OGE90UC8-b8WmC6GldanR1DGrr">
+    </div>
+    </div>
+    </header>
+
+
+                                                <!-- Page Canvas -->
+    <main class="mt-20 p-12 flex gap-12 overflow-y-auto">
+    <!-- Left Side: Table Area -->
+    <div class="flex-1">
+    <div class="flex justify-between items-end mb-12">
+    <div>
+    <span class="text-[10px] tracking-[0.3em] text-primary uppercase font-bold">Sacred Archive</span>
+    <h2 class="text-5xl font-serif text-on-surface mt-2">Artifact Orders</h2>
+    </div>
+    <button class="gold-gradient px-8 py-3 flex items-center space-x-3 shadow-[0_0_20px_rgba(242,202,80,0.2)] hover:shadow-[0_0_25px_rgba(242,202,80,0.4)] transition-all transform active:scale-95">
+    <span class="material-symbols-outlined text-on-primary" data-icon="add" style="font-variation-settings: 'wght' 700;">add</span>
+    <span class="text-xs font-black text-on-primary uppercase tracking-widest font-label">Add New Artifact</span>
+    </button>
+    </div>
+
+                                                                        <!-- Filters -->
+    <div class="flex space-x-4 mb-8">
+    <button class="px-6 py-2 bg-surface-container-high border-b-2 border-primary text-xs font-bold text-primary uppercase tracking-widest">All Eras</button>
+    <button class="px-6 py-2 bg-surface-container text-xs font-bold text-stone-500 uppercase tracking-widest hover:text-stone-300 transition-colors">Products</button>
+    <button class="px-6 py-2 bg-surface-container text-xs font-bold text-stone-500 uppercase tracking-widest hover:text-stone-300 transition-colors">Middle Kingdom</button>
+    <button class="px-6 py-2 bg-surface-container text-xs font-bold text-stone-500 uppercase tracking-widest hover:text-stone-300 transition-colors">New Kingdom</button>
+    </div>
+    
+                                                            <!-- Custom Table -->
+    <div class="bg-surface-container relative overflow-hidden group">
+    <div class="hieroglyph-overlay absolute inset-0 pointer-events-none"></div>
+    <table class="w-full text-left border-collapse">
+    <thead>
+    <tr class="bg-surface-container-lowest/50">
+    <th class="px-6 py-5 text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-800/10">Artifact</th>
+    <th class="px-6 py-5 text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-800/10">Nomenclature</th>
+    <th class="px-6 py-5 text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-800/10">Chronology</th>
+    <th class="px-6 py-5 text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-800/10">Evaluation</th>
+    <th class="px-6 py-5 text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-800/10 text-center">Status</th>
+    <th class="px-6 py-5 text-[10px] font-bold text-stone-500 uppercase tracking-widest border-b border-stone-800/10 text-right">Actions</th>
+    </tr>
+    </thead>
+    <tbody class="divide-y divide-stone-800/10">
+
+                                                                    <!-- Row 1 -->
+    <tr class="hover:bg-surface-container-high/50 transition-colors">
+    <td class="px-6 py-4">
+    <img alt="Golden Mask" class="w-16 h-16 object-cover ghost-border" data-alt="close-up of an ancient egyptian golden death mask with lapis lazuli inlays, cinematic lighting, dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoWHqj0EW9XZd_jMR0BYLhf4tmPr-a4SpHCrSC1lr6Hbhb37IGPsmZ_SPx-jp2Qfx64Tn0Zcn_xqOyTscPawe7h1SlyVYBXPVd3Uq573druCjnKrucEIXSOoBTU2N_M0avhP6qtPInLmVlAqrWAKYrF1BRiIiw_qT4xeOxX2KYzHe7ckGKcFqkEg-IeV4bwWDQBS0PXwGbEuK8b4bxS1sxowMuV2Bhdde7SzSM9Etr-BVUqy2BsCluKjfhX83UszCI4hSDzYf5iygB">
+    </td>
+    <td class="px-6 py-4">
+    <div class="font-bold text-sm text-on-surface">Mask of the Sun</div>
+    <div class="text-[11px] text-stone-500 mt-0.5">قناع الشمس الذهبي</div>
+    </td>
+    <td class="px-6 py-4">
+    <span class="text-xs font-medium text-secondary bg-secondary-container/20 px-2 py-1 rounded-sm">New Kingdom</span>
+    </td>
+    <td class="px-6 py-4">
+    <div class="font-serif font-bold text-primary">1,250,000 <span class="text-[10px] font-body tracking-tighter uppercase ml-1">EGP</span></div>
+    </td>
+    <td class="px-6 py-4 text-center">
+    <div class="flex items-center justify-center">
+    <div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#f2ca50] mr-2"></div>
+    <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Archived</span>
+    </div>
+    </td>
+    <td class="px-6 py-4 text-right">
+    <div class="flex justify-end space-x-3">
+    <button class="text-stone-500 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg" data-icon="edit">edit</span></button>
+    <button class="text-stone-500 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg" data-icon="delete">delete</span></button>
+    </div>
+    </td>
+    </tr>
+
+                                                                                            <!-- Row 2 -->
+    <tr class="hover:bg-surface-container-high/50 transition-colors">
+    <td class="px-6 py-4">
+    <img alt="Ceramic Vase" class="w-16 h-16 object-cover ghost-border" data-alt="elegant ancient terracotta vase with intricate black patterns, soft side lighting in a museum display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDl3L7rl0P_kiAx7uSsfgic5ZEhKjFnFphJiac2Oiy4HCZqBgKoE07TjW8UvQkzZq9lppGop9g3XJErcjHFy3fuWWHsjkHFYQHf7Swn_OI9ExsnIjCgX_-dZynp9mN3ujs7MagmrcGTqjlSQBm4DZKHsIk00vCOPl86A6V8ej-0zrE9yGVGFrM2r_p0ZoKWrOZih64QrnBCeFQ0KeRL3aYqnP7sRb_ugcEunh1VX3WMeGE6EYkkh8iR77HI2h9f4h0bCNzHLk02zkp">
+    </td>
+    <td class="px-6 py-4">
+    <div class="font-bold text-sm text-on-surface">Canopic Jar: Imsety</div>
+    <div class="text-[11px] text-stone-500 mt-0.5">جرة كانوبية: إمستي</div>
+    </td>
+    <td class="px-6 py-4">
+    <span class="text-xs font-medium text-stone-300 bg-stone-800/40 px-2 py-1 rounded-sm">Middle Kingdom</span>
+    </td>
+    <td class="px-6 py-4">
+    <div class="font-serif font-bold text-primary">45,000 <span class="text-[10px] font-body tracking-tighter uppercase ml-1">EGP</span></div>
+    </td>
+    <td class="px-6 py-4 text-center">
+    <div class="flex items-center justify-center">
+    <div class="w-2 h-2 rounded-full bg-error shadow-[0_0_8px_#ffb4ab] mr-2"></div>
+    <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Out of Stock</span>
+    </div>
+    </td>
+    <td class="px-6 py-4 text-right">
+    <div class="flex justify-end space-x-3">
+    <button class="text-stone-500 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg" data-icon="edit">edit</span></button>
+    <button class="text-stone-500 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg" data-icon="delete">delete</span></button>
+    </div>
+    </td>
+    </tr>
+
+                                                                                                        <!-- Row 3 -->
+    <tr class="hover:bg-surface-container-high/50 transition-colors">
+    <td class="px-6 py-4">
+    <img alt="Stone Tablet" class="w-16 h-16 object-cover ghost-border" data-alt="bas-relief stone carving with detailed hieroglyphics, moody atmospheric lighting highlighting textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVYpeEFuG3fUmXswhdOpIp_opgmL6euou8qP14sBivtHlNtzMm7IJ7lRoeeNL0e8jb1DXu1YQkhlDI88gSyEUXpL37GI8OBSSWDB91ABwcjky_fBDZJQwXmKawtWbVROKvsgHgFi0sdp3LScdDD1mtWZEODvIlV69yoZAKOmNzkqUmQCrA63S1c3x_oQbzcPM82SamFNwf4AvUxiHd19u48VKfAYVaEXz9-VC9vsjoN-DZAzmOcYqeh9pGsEW8kdV6yWnXQUlpH_GG">
+    </td>
+    <td class="px-6 py-4">
+    <div class="font-bold text-sm text-on-surface">Basalt Stela</div>
+    <div class="text-[11px] text-stone-500 mt-0.5">لوحة من البازلت</div>
+    </td>
+    <td class="px-6 py-4">
+    <span class="text-xs font-medium text-stone-300 bg-stone-800/40 px-2 py-1 rounded-sm">Old Kingdom</span>
+    </td>
+    <td class="px-6 py-4">
+    <div class="font-serif font-bold text-primary">780,000 <span class="text-[10px] font-body tracking-tighter uppercase ml-1">EGP</span></div>
+    </td>
+    <td class="px-6 py-4 text-center">
+    <div class="flex items-center justify-center">
+    <div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#f2ca50] mr-2"></div>
+    <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Archived</span>
+    </div>
+    </td>
+    <td class="px-6 py-4 text-right">
+    <div class="flex justify-end space-x-3">
+    <button class="text-stone-500 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg" data-icon="edit">edit</span></button>
+    <button class="text-stone-500 hover:text-error transition-colors"><span class="material-symbols-outlined text-lg" data-icon="delete">delete</span></button>
+    </div>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+
+                                                                                        <!-- Right Side: Sidebar Summary -->
+    <aside class="w-80 space-y-6">
+    <!-- Total Value Card -->
+    <div class="bg-surface-container p-8 relative overflow-hidden group">
+    <div class="hieroglyph-overlay absolute inset-0"></div>
+    <span class="text-[10px] tracking-[0.2em] text-stone-500 uppercase font-bold">Financial Standing</span>
+    <h3 class="text-xs text-on-surface-variant uppercase tracking-widest font-bold mt-4 mb-1">Total Order Value</h3>
+    <div class="flex items-baseline">
+    <span class="text-4xl font-serif font-bold text-primary">8.42</span>
+    <span class="text-lg font-serif font-bold text-primary ml-1">M</span>
+    <span class="text-[10px] font-bold text-stone-500 uppercase tracking-tighter ml-2">EGP</span>
+    </div>
+    <div class="mt-8 h-1 w-full bg-stone-800">
+    <div class="h-full bg-primary w-2/3 shadow-[0_0_8px_#f2ca50]"></div>
+    </div>
+    <p class="text-[10px] text-stone-500 mt-4 leading-relaxed italic">"Gold is the flesh of the gods." - Value appraisal updated 2h ago.</p>
+    </div>
+
+                                                                                <!-- Stock Alerts -->
+    <div class="bg-surface-container p-8 relative overflow-hidden">
+    <div class="hieroglyph-overlay absolute inset-0"></div>
+    <span class="text-[10px] tracking-[0.2em] text-stone-500 uppercase font-bold">Orders Alerts</span>
+    <div class="mt-6 space-y-6">
+    <div class="flex items-start space-x-4">
+    <div class="w-10 h-10 flex items-center justify-center bg-error-container/20 text-error rounded-sm">
+    <span class="material-symbols-outlined" data-icon="warning">warning</span>
+    </div>
+    <div>
+    <h4 class="text-xs font-bold text-on-surface uppercase tracking-wider">Out of Stock</h4>
+    <p class="text-2xl font-serif text-on-surface">12 <span class="text-[10px] font-body text-stone-500 uppercase ml-1">Items</span></p>
+    </div>
+    </div>
+    <div class="flex items-start space-x-4">
+    <div class="w-10 h-10 flex items-center justify-center bg-secondary-container/20 text-secondary rounded-sm">
+    <span class="material-symbols-outlined" data-icon="hourglass_empty">hourglass_empty</span>
+    </div>
+    <div>
+    <h4 class="text-xs font-bold text-on-surface uppercase tracking-wider">Under Restoration</h4>
+    <p class="text-2xl font-serif text-on-surface">4 <span class="text-[10px] font-body text-stone-500 uppercase ml-1">Items</span></p>
+    </div>
+    </div>
+    </div>
+    <button class="w-full mt-8 py-3 ghost-border text-[10px] font-black uppercase tracking-[0.2em] text-primary hover:bg-primary/5 transition-all">
+                            Generate Audit Report
+                        </button>
+    </div>
+
+                                                                                        <!-- Quick Action Card -->
+    <div class="bg-surface-container-high p-8 border-l-2 border-primary">
+    <h4 class="text-xs font-black text-primary uppercase tracking-widest mb-4">Curator's Note</h4>
+    <p class="text-xs text-on-surface-variant leading-relaxed">
+                            Artifact #4429 (Royal Scarab) requires climate humidity adjustment in Gallery IV. Orders sync pending.
+                        </p>
+    </div>
+    </aside>
+    </main>
+    </div>
+
+
+    </body>
+            </html>

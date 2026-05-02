@@ -1,0 +1,17 @@
+/* Primary Color */
+.text-primary {
+    color: #1d4ed8;
+}
+
+.border-primary {
+    border-color: #1d4ed8;
+}
+
+/* Surface Colors (زي Material Design) */
+.bg-surface-container-high {
+    background-color: #f8fafc;
+}
+
+.text-on-surface-variant {
+    color: #6b7280;
+}

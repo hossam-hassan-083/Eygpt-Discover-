@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register-Egypt Discover</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+  margin:0;
+  font-family: 'Manrope', sans-serif;
+}
+
+.bg{
+  background-image: url('/photo/back.png');
+  background-size: cover;
+  background-position: center;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card{
+  background: rgba(0,0,0,0.9);
+  padding:30px;
+  border-radius:20px;
+  width:380px;
+  color:white;
+  text-align:center;
+  border:1px solid #ecb61340;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:10px;
+  background:#1a1a1a;
+  color:white;
+  border:none;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#ecb613;
+  border-radius:10px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<!-- //الاشعارات -->
+  <div id="toast-container" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3"></div>
+
+
+
+<div class="bg">
+<div class="card">
+
+<h2>Create Account ✨</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="username" placeholder="User Name">
+<input type="email" id="email" placeholder="Email">
+<input type="text" id="phone" placeholder="Phone">
+<div style="position: relative;">
+
+  <input type="TEXT" id="password" placeholder="Password">
+
+  <span onclick="togglePassword()" 
+        style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">
+    👁️
+  </span>
+
+</div>
+<input type="password" id="confirmPassword" placeholder="Confirm Password">
+<input type="text" id="country" placeholder="Country">
+<input type="date" id="dob">
+
+<button onclick="register()">Sign Up</button>
+
+</div>
+</div>
+
+<script>
+
+async function register(){
+
+
+let fullName = document.getElementById("name").value
+let userName = document.getElementById("username").value
+let email = document.getElementById("email").value
+let password = document.getElementById("password").value
+let confirmPassword = document.getElementById("confirmPassword").value
+let phone = document.getElementById("phone").value
+let country = document.getElementById("country").value
+let dateOfBirth = document.getElementById("dob").value
+
+
+
+// ✅ validation
+if(!fullName || !userName || !email || !password || !confirmPassword || !phone || !country || !dateOfBirth){
+  showToast("Fill all fields ❌", "error");
+  return
+}
+
+
+// ✅ check passwords match
+if(password !== confirmPassword){
+  showToast("Passwords do not match ❌", "error");
+  return
+}
+
+
+let btn = document.querySelector("button")
+btn.innerText = "Loading..."
+
+try{
+
+let response = await fetch("https://egyptdiscover.runasp.net/api/Account/Register", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body:JSON.stringify({
+    fullName: fullName,
+    country: country,
+    dateOfBirth: dateOfBirth,
+    phoneNumber: phone,
+    userName: userName,
+    email: email,
+    password: password,
+    confirmPassword: confirmPassword
+  })
+})
+
+let text = await response.text()
+console.log("Server Response:", text)
+
+let data = {}
+
+try{
+  data = JSON.parse(text)
+}catch{
+  data = { message: text }
+}
+
+if(response.ok){
+  showToast("Account created ✅", "success");
+
+  // 👇 بعد التسجيل يروح لصفحة اللوجين
+  window.location.href = "Signin.html"
+
+}else{
+  showToast(data.message || text || "Error ❌", "error");
+}
+
+// ✅ handle specific error for duplicate username لو اسم المستخدم موجود بالفعل يغيره
+if(data.errors){
+  if(data.errors.some(e => e.code === "DuplicateUserName")){
+    showToast("Username already exists ❌ حاول باسم تاني", "error")
+  }
+}
+
+btn.innerText = "Sign Up"
+
+}catch(error){
+  console.log(error)
+  showToast("Connection problem ❌", "error")
+  btn.innerText = "Sign Up"
+}
+
+}
+// الاشعارات
+function showToast(message, type = "success") {
+
+    const container = document.getElementById("toast-container");
+
+    const toast = document.createElement("div");
+
+    const styles = {
+        success: "border-primary/40",
+        error: "border-red-500/40",
+        info: "border-blue-500/40"
+    };
+
+    toast.className = `
+        backdrop-blur-xl bg-white/5 dark:bg-black/30
+        border ${styles[type]}
+        text-white px-6 py-4 rounded-xl shadow-2xl
+        flex items-center gap-3 min-w-[280px]
+        transform -translate-y-10 opacity-0 scale-95
+        transition-all duration-500 ease-out
+    `;
+
+    toast.innerHTML = `
+        <span class="material-symbols-outlined text-primary text-xl">
+            ${type === "success" ? "check_circle" : type === "error" ? "error" : "info"}
+        </span>
+        <span class="text-sm font-semibold tracking-wide">${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // دخول ناعم
+    setTimeout(() => {
+        toast.classList.remove("-translate-y-10", "opacity-0", "scale-95");
+    }, 100);
+
+    // خروج
+    setTimeout(() => {
+        toast.classList.add("-translate-y-10", "opacity-0", "scale-95");
+
+        setTimeout(() => {
+            toast.remove();
+        }, 400);
+
+    }, 3000);
+}
+</script>
+
+</body>
+</html>

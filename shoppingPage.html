@@ -1,0 +1,562 @@
+<!-- <!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>store_shopping</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white"> -->
+
+<!-- Header -->
+    <!-- <div class="p-4 flex justify-between items-center border-b">
+    <h1 class="text-xl font-bold">Royal Heritage</h1>
+    <a href="cart.html" class="relative">
+        🛒
+        <span id="cart-counter" class="absolute -top-2 -right-2 bg-yellow-400 text-black text-xs px-2 rounded-full hidden">0</span>
+    </a>
+    </div> -->
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egypt Discover</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Noto+Sans+Arabic:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shopping.css">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                "primary": "#ecb613",
+                "background-light": "#f8f8f6",
+                "background-dark": "#0a0a0a",
+                "faience": "#00CED1",
+                "stone-950": "#121212",
+            },
+            fontFamily: {
+                "display": ["Manrope", "Noto Sans Arabic", "sans-serif"]
+            },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+        },
+        }
+    </script>
+</head>
+    <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen relative">
+        <!-- الاشعارات  -->
+        <div id="toast" class="fixed top-[200px] right-20 z-50"></div>
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 egyptian-pattern pointer-events-none"></div>
+        <!-- Subtle Background Pattern -->
+<div class="fixed inset-0 egyptian-pattern pointer-events-none"></div>
+<div class="relative flex flex-col min-h-screen w-full">
+
+<!-- Top Navigation Bar -->
+
+<header id="navbar" class="relative sticky top-0 z-50 w-full border-b border-solid border-slate-200 dark:border-[#393528] bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-20 py-3">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div  class="text-primary">
+<span class="material-symbols-outlined text-3xl">star_rate</span>
+</div>
+<h2 id="logo" class="text-xl font-extrabold leading-tight tracking-[-0.015em]">
+Egypt 
+<span class="text-primary">Discover</span>
+</h2>
+</div>
+<nav id="navLinks" class="hidden lg:flex items-center gap-8">
+
+<a class="hover:text-primary text-sm font-semibold" href="/home.html">Home</a>
+<a class="hover:text-primary text-sm font-semibold" href="/history.html">History</a>
+<a class="hover:text-primary text-sm font-semibold" href="/shopping.html">Shopping</a>
+<a class="hover:text-primary text-sm font-semibold" href="/Booking.html">Booking</a>
+<a class="hover:text-primary text-sm font-semibold" href="/EXPLOR.HTML">Visit</a>
+
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+    <!-- icon cart -->
+        <div class="flex items-center gap-2 mr-2 " >
+            <button class="relative p-2 text-slate-400 hover:text-primary transition-colors">
+    
+                <a href="/cart.html"  class="material-symbols-outlined  active:scale-90 translate-x-1">shopping_cart</a>
+    
+                <span id="cart-counter"
+                        class="hidden absolute top-0 right-0 
+                            bg-faience text-black text-[10px] font-bold 
+                            h-4 w-4 rounded-full 
+                            items-center justify-center
+                            transition-transform duration-200">
+                    0
+                </span>
+    
+            </button>
+        </div>
+
+
+<label class="flex flex-col w-full max-w-64">
+<div class="flex w-full items-stretch rounded-lg h-10 bg-slate-100 dark:bg-[#27241c] border border-slate-200 dark:border-[#393528]">
+<div class="text-slate-400 flex items-center justify-center pl-4">
+<span id="search-box" class="material-symbols-outlined text-[20px]">search</span>
+
+</div>
+<input  
+        id="searchInput"
+        type="text"
+        placeholder="Search..."
+class="w-full bg-transparent border-none focus:ring-0 text-sm px-3 placeholder:text-slate-500" placeholder="Search " value="">
+</div>
+</label>
+        <!-- Search Results -->
+        <!-- <div id="searchResults" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"></div> -->
+
+
+<button id="translateBtn" class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#27241c] hover:bg-primary/20 transition-all text-primary border border-slate-200 dark:border-[#393528]">
+    <span class="material-symbols-outlined text-[20px]">translate</span>
+
+</button>
+    <a href="/profile.html">
+    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10 border-2 border-primary" data-alt="User profile avatar" style="background-image: url('/photo/admin.png');">
+    
+    </div>
+    </a>
+
+</div>
+<button id="menuBtn" class="lg:hidden flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#27241c] border border-slate-200 dark:border-[#393528]">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div id="languageMenuNav"
+        class="hidden absolute top-16 right-6 z-50 w-44 bg-black/80 text-white rounded-lg p-2 space-y-1">
+    
+<button onclick="changeLanguage('ar')" class="block w-full text-left px-3 py-2 hover:bg-primary/30 rounded">العربية</button>
+
+<button onclick="changeLanguage('en')" class="block w-full text-left px-3 py-2 hover:bg-primary/30 rounded">English</button>
+
+<button onclick="changeLanguage('fr')" class="block w-full text-left px-3 py-2 hover:bg-primary/30 rounded">Français</button>
+
+<button onclick="changeLanguage('de')" class="block w-full text-left px-3 py-2 hover:bg-primary/30 rounded">Deutsch</button>
+
+<button onclick="changeLanguage('es')" class="block w-full text-left px-3 py-2 hover:bg-primary/30 rounded">Español</button>
+
+</div>
+
+
+</header>
+<div id="mobileMenu" class="hidden lg:hidden flex flex-col bg-background-light dark:bg-background-dark border-b border-slate-200 dark:border-[#393528] px-6 py-4 gap-4">
+<a class="hover:text-primary text-sm font-semibold" href="/home.html">Home</a>
+<a class="hover:text-primary text-sm font-semibold" href="/history.html">History</a>
+<a class="hover:text-primary text-sm font-semibold" href="/shopping.html">Shopping</a>
+<a class="hover:text-primary text-sm font-semibold" href="/Booking.html">Booking</a>
+<a class="hover:text-primary text-sm font-semibold" href="/EXPLOR.HTML">Visit</a>
+
+</div>
+
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-[1440px] mx-auto p-6 lg:p-10">
+
+    
+                                                <!-- الاشعار  -->
+        <div id="toast-container" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3"></div>
+
+    <!-- Page Title -->
+            <div class="text-center my-16 ">
+                <h1 class="text-4xl lg:text-6xl font-black text-white mb-4 tracking-tight">The Royal Treasury</h1>
+                <h2 class="text-3xl font-bold text-primary mb-6">الخزانة الملكية</h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto"></div>
+            </div>
+                                    <!-- Old Kingdom Section -->
+            <section class="mb-20">
+                <div class="flex items-center justify-between border-b border-primary/20 pb-4 mb-8 container mx-auto px-6 lg:px-20">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Old Kingdom Treasures</h3>
+                        <p class="text-primary font-medium">كنوز الدولة القديمة</p>
+                    </div>
+                    <span class="material-symbols-outlined text-4xl text-primary/40">change_history</span>
+                </div>
+
+                                                <!-- Products -->
+    
+    <div class="p-6">
+    <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <div id="searchResults" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"></div>
+    </div> 
+                <!-- New Kingdom Section -->
+            <section class="mb-20">
+                <div class="flex items-center justify-between border-b border-primary/20 pb-4 mb-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">New Kingdom Masterpieces</h3>
+                        <p class="text-primary font-medium">روائع الدولة الحديثة</p>
+                    </div>
+                    <span class="material-symbols-outlined text-4xl text-primary/40">military_tech</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product 1 - Nefertiti Bust -->
+                    <!-- <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div> -->
+                    
+                    
+
+                </div>
+            </section>
+        </main>
+</main>
+                                                    <!-- Footer -->
+        <footer class="w-full border-t border-slate-200 dark:border-[#393528] py-8 px-10 bg-background-dark">
+            <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 opacity-60">
+                <p class="text-sm">© 2026 Royal Heritage Cairo With EYGPT DISCOVER. All Rights Reserved.</p>
+                <div class="flex gap-6">
+                    <a class="text-xs hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                    <a class="text-xs hover:text-primary transition-colors" href="#">Terms of Service</a>
+                    <a class="text-xs hover:text-primary transition-colors" href="#">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+
+const searchInput = document.getElementById("searchInput");
+const resultsDiv = document.getElementById("searchResults");
+const productsContainer = document.getElementById("products-container");
+
+let timeout = null;
+
+    searchInput.addEventListener("input", function () {
+    clearTimeout(timeout);
+
+    const query = searchInput.value.trim();
+
+  // لو مفيش بحث → رجّع المنتجات الأساسية
+    if (query.length < 2) {
+        resultsDiv.classList.add("hidden");
+        productsContainer.classList.remove("hidden");
+        resultsDiv.innerHTML = "";
+        return;
+    }
+
+    timeout = setTimeout(() => {
+    productsContainer.classList.add("hidden");
+    resultsDiv.classList.remove("hidden");
+
+    resultsDiv.innerHTML = "<p class='text-white'>Loading...</p>";
+
+    fetch(`https://egyptdiscover.runasp.net/api/Product/Search?name=${query}`)
+        .then(res => res.json())
+        .then(data => {
+            resultsDiv.innerHTML = "";
+
+            if (!data || data.length === 0) {
+            resultsDiv.innerHTML = "<p class='text-white'>No results found</p>";
+            return;
+            }
+
+        resultsDiv.innerHTML = data.map(product => `
+        
+        <div class="gold-border-gradient bg-middle-kingdom relative rounded-xl overflow-hidden group shadow-2xl">
+            
+            <div class="aspect-[4/5] flex items-center justify-center p-8">
+                <img 
+                    src="https://egyptdiscover.runasp.net${product.imageUrl}" 
+                    class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                />
+            </div>
+
+            <div class="product-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+
+                <h3 class="text-lg font-bold text-white mb-1">${product.name}</h3>
+
+                <p class="text-slate-300 text-sm mb-4">${product.description}</p>
+
+                <div class="flex items-center justify-between">
+
+                    <p class="bg-white text-yellow-400 font-bold mt-2 px-2 py-1 rounded">
+                        ${product.price} EGP
+                    </p>
+
+                    <div class="w-fit">
+                        <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})"
+                            class="bg-primary hover:bg-white text-black px-4 py-2 rounded-lg font-bold text-sm transition-all flex items-center gap-2 shadow-lg active:scale-95">
+
+                            <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                            أضف للسلة
+
+                        </button> 
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `).join("");
+        })
+        .catch(err => {
+            resultsDiv.innerHTML = "<p class='text-red-500'>Error loading data</p>";
+            console.error(err);
+        });
+
+    }, 400);
+});            
+
+const API_URL = "https://egyptdiscover.runasp.net/api/Product/Products";
+
+async function getProducts() {
+    try {
+        const res = await fetch(API_URL);
+        const products = await res.json();
+        displayProducts(products);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function displayProducts(products) {
+    console.log(products); // 👈 شوف الداتا جاية ازاي
+    const container = document.getElementById("products-container");
+
+    container.innerHTML = products.map(product => `
+    <div class="gold-border-gradient bg-middle-kingdom relative rounded-xl overflow-hidden group shadow-2xl">
+                        <div class="aspect-[4/5] flex items-center justify-center p-8">
+                            <img alt="Step Pyramid Model" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]" src="https://egyptdiscover.runasp.net${product.imageUrl}" 
+                                class="w-full h-48 object-cover rounded-lg" />
+                        </div>
+        <div class="product-card-overlay absolute inset-0 flex flex-col justify-end p-6">
+                <h3 class="text-lg font-bold text-white mb-1">${product.name}</h3>
+
+                <p class="text-slate-300 text-sm mb-4">${product.description}</p>
+
+                    <!-- // السعر والزرار -->
+                <div class="flex items-center justify-between">
+
+                        <p class=" bg-white text-yellow-400 font-bold mt-2">${product.price} EGP</p>
+
+                    <span class="text-primary text-xl font-black">  
+
+                                    <!-- button add to cart -->
+                            <div class="w-fit">
+                                    <!-- زرار أضف للسلة -->
+                                    <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})"
+                        class="bg-primary hover:bg-white text-black px-4 py-2 rounded-lg font-bold text-sm transition-all flex items-center gap-2 shadow-lg active:scale-95">
+                            <span class="material-symbols-outlined text-sm"> add_shopping_cart </span>
+                        أضف للسلة
+                        </button> 
+
+                            </div>
+
+
+
+
+                    </span>
+
+                </div>  
+        </div>  
+
+            </div>
+    </div>
+    `).join("");
+}
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Update<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Update<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+async function addToCart(id) {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+            showToast("لازم تعمل تسجيل دخول ❌");
+        return;
+    }
+
+    try {
+        const res = await fetch(
+            `https://egyptdiscover.runasp.net/api/Cart/add-item-to-cart?productId=${id}&quantity=1`,
+            {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            }
+        );
+
+        const text = await res.text();
+        console.log("SERVER RESPONSE:", text);
+
+        if (!res.ok) {
+            showToast(text, "error");
+            return;
+        }
+
+        showToast("تمت الإضافة للسلة ✅");
+        updateCartCount();
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Update<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+
+//async function updateCartCount() {
+  //  try {
+    //    const res = await fetch("https://egyptdiscover.runasp.net/api/Cart/MyCart");
+      //  const data = await res.json();
+
+    //    const badge = document.getElementById("cart-counter");
+
+      //  let total = 0;
+
+        //if (data.items) {
+          //  total = data.items.reduce((sum, item) => sum + item.quantity, 0);
+        //}
+
+        //if (total > 0) {
+          //  badge.classList.remove("hidden");
+           // badge.textContent = total;
+ //       } else {
+   //         badge.classList.add("hidden");
+     //   }
+
+  //  } catch (err) {
+   //     console.error(err);
+  //  }
+//}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Update<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+async function updateCartCount() {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    try {
+        const res = await fetch("https://egyptdiscover.runasp.net/api/Cart/MyCart", {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        const data = await res.json();
+
+        const badge = document.getElementById("cart-counter");
+
+        let total = 0;
+
+        if (data.items) {
+            total = data.items.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        if (total > 0) {
+            badge.classList.remove("hidden");
+            badge.textContent = total;
+        } else {
+            badge.classList.add("hidden");
+        }
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Update<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+getProducts();
+updateCartCount();
+
+
+// الشعار ده عشان يطلع اشعار لما تضيف حاجة للكارت
+function showToast(message, type = "success") {
+
+    const toastContainer = document.getElementById("toast");
+
+    const toast = document.createElement("div");
+
+    toast.className = `
+        px-4 py-3 mb-3 rounded-lg shadow-lg text-white font-semibold
+        transform translate-x-full opacity-0 transition-all duration-500
+        ${type === "error" ? "bg-red-500" : "bg-green-500"}
+    `;
+
+    toast.textContent = message;
+
+    toastContainer.appendChild(toast);
+
+    // animate in
+    setTimeout(() => {
+        toast.classList.remove("translate-x-full", "opacity-0");
+    }, 100);
+
+    // remove بعد 3 ثواني
+    setTimeout(() => {
+        toast.classList.add("translate-x-full", "opacity-0");
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
+}
+
+//الاشعارات
+function showToast(message, type = "success") {
+
+    const container = document.getElementById("toast-container");
+
+    const toast = document.createElement("div");
+
+    const styles = {
+        success: "border-primary/40",
+        error: "border-red-500/40",
+        info: "border-blue-500/40"
+    };
+
+    toast.className = `
+        backdrop-blur-xl bg-white/5 dark:bg-black/30
+        border ${styles[type]}
+        text-white px-6 py-4 rounded-xl shadow-2xl
+        flex items-center gap-3 min-w-[280px]
+        transform -translate-y-10 opacity-0 scale-95
+        transition-all duration-500 ease-out
+    `;
+
+    toast.innerHTML = `
+        <span class="material-symbols-outlined text-primary text-xl">
+            ${type === "success" ? "check_circle" : type === "error" ? "error" : "info"}
+        </span>
+        <span class="text-sm font-semibold tracking-wide">${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // دخول ناعم
+    setTimeout(() => {
+        toast.classList.remove("-translate-y-10", "opacity-0", "scale-95");
+    }, 100);
+
+    // خروج
+    setTimeout(() => {
+        toast.classList.add("-translate-y-10", "opacity-0", "scale-95");
+
+        setTimeout(() => {
+            toast.remove();
+        }, 400);
+
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
+

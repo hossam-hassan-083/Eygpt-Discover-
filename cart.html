@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Shopping Cart</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="cart.css">
+    
+    <!-- Fonts and Libraries -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Noto+Sans+Arabic:wght@100..900&amp;display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ecb613",
+                        "background-light": "#f8f8f6",
+                        "background-dark": "#0a0a0a",
+                        "faience": "#00CED1",
+                        "stone-950": "#121212",
+                        "limestone": "#1a1814",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "Noto Sans Arabic", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen relative">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 egyptian-pattern pointer-events-none"></div>
+    
+    <div class="relative flex flex-col min-h-screen w-full">
+        <!-- Header -->
+        <header class="sticky top-0 z-50 w-full border-b border-solid border-slate-200 dark:border-[#393528] bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-20 py-3">
+            <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3">
+                        <div class="text-primary">
+                            <span class="material-symbols-outlined text-3xl">star_rate</span>
+                        </div>
+                        <h2 class="text-xl font-extrabold leading-tight tracking-[-0.015em] hidden md:block">
+                            Royal Heritage <span class="text-primary">Museum</span>
+                        </h2>
+                    </div>
+                    
+                    <nav class="hidden lg:flex items-center gap-8">
+                        <a class="hover:text-primary transition-colors text-sm font-semibold" href="#">Home / الرئيسية</a>
+                        <a class="hover:text-primary transition-colors text-sm font-semibold" href="#">History / التاريخ</a>
+                        <a class="text-primary transition-colors text-sm font-semibold" href="./shoppingPage.html">Shopping / التسوق</a>
+                        <a class="hover:text-primary transition-colors text-sm font-semibold" href="#">Booking / الحجز</a>
+                    </nav>
+                </div>
+                
+                <div class="flex flex-1 justify-end gap-4 items-center">
+                    <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#27241c] hover:bg-primary/20 transition-all text-primary border border-slate-200 dark:border-[#393528]">
+                        <span class="material-symbols-outlined text-[20px]">translate</span>
+                    </button>
+                    
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10 border-2 border-primary" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCtza2fWMuCnxKnqwVdm58ZuEhzqvRbSu37FL2vX_ab9owziDxGAV1u2scD85YFy9wKaYerOfleMm-qkP6tTjaCPEXqsm_6A8vklwGpD-GIMHXY1BCSomk9Kwmr38maMhkyPOUIGvRMtQqVh6qybACJuLdKcFH6xy7SntArPHoxHXoYMpPgJse-LGvHwb7ny-78e0h4XmOBr1GnhVe8gl37o2wKafWG9yk1-RagKzOFLqLmkzSdayCgzX6hX1qUbrTKYjVfPUt66gOU&quot;');"></div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="flex-1 w-full max-w-[1440px] mx-auto p-6 lg:p-10">
+            <!-- Page Title -->
+            <div class="mb-12">
+                <h1 class="text-3xl lg:text-4xl font-black text-white mb-2 tracking-tight">Your Royal Treasury</h1>
+                <h2 class="text-2xl font-bold text-primary">سلة مقتنياتك الملكية</h2>
+                <div class="w-24 h-1 bg-primary mt-4"></div>
+            </div>
+            
+            <!-- Cart Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <!-- Cart Items Section -->
+                <div class="lg:col-span-8 space-y-6">
+                    <!-- Cart Item 1 - Nefertiti Bust -->
+                        <div id="cart-items" class="space-y-6"></div>
+                        <!-- <div id="cart-items" class="space-y-6"></div>
+                    <div class="flex gap-6 p-4 rounded-xl gold-border-gradient bg-stone-950/40 relative group">
+                        <div class="w-32 h-40 lg:w-40 lg:h-52 rounded-lg overflow-hidden flex-shrink-0 relative">
+                            <div class="absolute inset-0 bg-new-kingdom"></div>
+                            <img alt="Nefertiti Bust" class="w-full h-full object-contain relative z-10 p-2 drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9_FaXBon3751ybiY0HTtJNP-YCpZ1HTVvacrIFbtqfHrnkKvMMDt8iwpABNGeO6D5WQ_ui_iFoH6_j-JpUWPqtB5jMLX4FOSTtsUiAeG1SoZQL-usQnFChsizbtEVwOnWTun9p_XusYXn0PpLcBAfPr3-HTgwPkGdAlWHPlh4CRzW2UC7s_SAT152c84QoV9bwwikPXzFjgIGX0d3yEKnQwgPI62YE3mRGIRk2CG7XFkOAZSNVpYMAx27RGoxYbrao8xv-C8FP3EA">
+                        </div>
+                        
+                        <div class="flex flex-col justify-between flex-1 py-1">
+                            <div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white">Nefertiti Bust Replica</h3>
+                                        <p class="text-primary font-medium text-sm">تمثال نصفي للملكة نفرتيتي</p>
+                                        <p class="text-slate-500 text-xs mt-1 uppercase tracking-widest">New Kingdom / الدولة الحديثة</p>
+                                    </div>
+                                    <button class="text-slate-500 hover:text-red-500 transition-colors">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-end justify-between">
+                                <div class="flex items-center gap-4 bg-black/40 border border-primary/20 rounded-full p-1 px-3">
+                                    <button class="text-primary hover:text-white transition-colors">
+                                        <span class="material-symbols-outlined text-sm">remove</span>
+                                    </button>
+                                    <span class="text-white font-bold w-4 text-center">1</span>
+                                    <button class="text-primary hover:text-white transition-colors">
+                                        <span class="material-symbols-outlined text-sm">add</span>
+                                    </button>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-black text-primary">5,500 EGP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Cart Item 2 - Seated Scribe -->
+                        <!-- <div id="cart-items" class="space-y-6"></div>
+                    <div class="flex gap-6 p-4 rounded-xl gold-border-gradient bg-stone-950/40 relative group">
+                        <div class="w-32 h-40 lg:w-40 lg:h-52 rounded-lg overflow-hidden flex-shrink-0 relative">
+                            <div class="absolute inset-0 bg-old-kingdom"></div>
+                            <img alt="Seated Scribe" class="w-full h-full object-contain relative z-10 p-4 drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9_FaXBon3751ybiY0HTtJNP-YCpZ1HTVvacrIFbtqfHrnkKvMMDt8iwpABNGeO6D5WQ_ui_iFoH6_j-JpUWPqtB5jMLX4FOSTtsUiAeG1SoZQL-usQnFChsizbtEVwOnWTun9p_XusYXn0PpLcBAfPr3-HTgwPkGdAlWHPlh4CRzW2UC7s_SAT152c84QoV9bwwikPXzFjgIGX0d3yEKnQwgPI62YE3mRGIRk2CG7XFkOAZSNVpYMAx27RGoxYbrao8xv-C8FP3EA">
+                        </div>
+                        
+                        <div class="flex flex-col justify-between flex-1 py-1">
+                            <div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white">The Seated Scribe</h3>
+                                        <p class="text-primary font-medium text-sm">تمثال الكاتب الجالس</p>
+                                        <p class="text-slate-500 text-xs mt-1 uppercase tracking-widest">Old Kingdom / الدولة القديمة</p>
+                                    </div>
+                                    <button class="text-slate-500 hover:text-red-500 transition-colors">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-end justify-between">
+                                <div class="flex items-center gap-4 bg-black/40 border border-primary/20 rounded-full p-1 px-3">
+                                    <button class="text-primary hover:text-white transition-colors">
+                                        <span class="material-symbols-outlined text-sm">remove</span>
+                                    </button>
+                                    <span class="text-white font-bold w-4 text-center">1</span>
+                                    <button class="text-primary hover:text-white transition-colors">
+                                        <span class="material-symbols-outlined text-sm">add</span>
+                                    </button>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-black text-primary">1,850 EGP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Cart Item 3 - Golden Ankh -->
+                        <!-- <div id="cart-items" class="space-y-6"></div>
+                    <div class="flex gap-6 p-4 rounded-xl gold-border-gradient bg-stone-950/40 relative group">
+                        <div class="w-32 h-40 lg:w-40 lg:h-52 rounded-lg overflow-hidden flex-shrink-0 relative">
+                            <div class="absolute inset-0 bg-new-kingdom"></div>
+                            <img alt="Golden Ankh" class="w-full h-full object-contain relative z-10 p-6 drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9T-HT_xqk6Z0us0hcgmIx2uw8f6BS3zmwPwKXAiCwYmwUHqi3KcsjNX9jKqR9yOhiAapB1cqEyldkfpQFaeildCi7NgydAXmjo5VBgnxembbewtgoMj_GkCVLcQbV1-7Mld2wbqvxAIgOUIj9hkQTDr-YplcZYMJ-oosTmInrI5xStyv7ZBHQDCJXK4NuNam0t7yjPiRQdUiiBy2JuS52Ez0MS_56R4Ag9av-xLGQewKWafH66_sDb9Wm61sk52_0mxQz3KAf6D_6">
+                        </div>
+                        
+                        <div class="flex flex-col justify-between flex-1 py-1">
+                            <div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white">Golden Ankh Amulet</h3>
+                                        <p class="text-primary font-medium text-sm">مفتاح الحياة الذهبي</p>
+                                        <p class="text-slate-500 text-xs mt-1 uppercase tracking-widest">New Kingdom / الدولة الحديثة</p>
+                                    </div>
+                                    <button class="text-slate-500 hover:text-red-500 transition-colors">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-end justify-between">
+                                <div class="flex items-center gap-4 bg-black/40 border border-primary/20 rounded-full p-1 px-3">
+                                    <button class="text-primary hover:text-white transition-colors">
+                                        <span class="material-symbols-outlined text-sm">remove</span>
+                                    </button>
+                                    <span class="text-white font-bold w-4 text-center">1</span>
+                                    <button class="text-primary hover:text-white transition-colors">
+                                        <span class="material-symbols-outlined text-sm">add</span>
+                                    </button>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-2xl font-black text-primary">2,100 EGP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Recommended Products Section -->
+                    <div class="mt-16">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Complete Your Collection</h3>
+                                <p class="text-primary font-medium">أكمل مجموعتك</p>
+                            </div>
+                            <div class="flex-1 border-t border-primary/20"></div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Product 1 - Scarab -->
+                            <div class="gold-border-gradient bg-middle-kingdom relative rounded-xl overflow-hidden group">
+                                <div class="aspect-square flex items-center justify-center p-6">
+                                    <img alt="Scarab" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXndPOPMBscbj2Uggx2d84e_uqIXEkQdnuWCJCcMnYdRHm_wDFBklNL-zv4jW25fx6S3yepWzUOn696AJKdvDsz-GxNDAvetvL5u5vMoHhtedkdPvM3TwVSTD_phbeKcwZpqnUN1kRCsG0q8sXByYZU2pG5kMWc0MF4WofSpU2NrYaizAB5GMfxRaE8G9nsBgNkbnf2lKkfsejt12tPF253z2Ibq_QM21jPYOcSf8_XMZ2Eq3BsYyzM5zhDwLpVHsTBOpWUVlQefMd">
+                                </div>
+                                <div class="product-card-overlay absolute inset-0 flex flex-col justify-end p-4">
+                                    <h4 class="text-white font-bold text-sm">Lapis Lazuli Scarab</h4>
+                                    <p class="text-faience text-xs mb-3">جعران من اللازورد</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-primary font-black text-sm">1,250 EGP</span>
+                                        <button class="bg-primary/20 border border-primary text-primary px-3 py-1 rounded-md font-bold text-xs hover:bg-primary hover:text-black transition-all">Quick Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Product 2 - Alabaster Vessel -->
+                            <div class="gold-border-gradient bg-old-kingdom relative rounded-xl overflow-hidden group">
+                                <div class="aspect-square flex items-center justify-center p-6">
+                                    <img alt="Alabaster Vessel" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWnVTRqf46TqbcxOIC7RpT9EfnW4_d16IC3AMmpotsqi-ZwB_a9G4PXb2anuV8dgbgEHgaQ-50BVkDK36alNNDRA6lFy7N2BxwDKlNjZRX08kS1iPW2HkJajfYyjb1mWnEfPMc87eyJb8UlXRVt4lLzUkImgMtVwrBgDwJpG9Ld_fyIAmyHxzhYyACgiuNtD-jQlp9IPB7r-IDlqEbJc1Wq6QCnzUW6bHMcQYKiFi-tqxTAMvWcXJVuxYErSyseWdgOiTdzs_NzP9t">
+                                </div>
+                                <div class="product-card-overlay absolute inset-0 flex flex-col justify-end p-4">
+                                    <h4 class="text-white font-bold text-sm">Alabaster Vessel</h4>
+                                    <p class="text-slate-400 text-xs mb-3">إناء من الألباستر</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-primary font-black text-sm">950 EGP</span>
+                                        <button class="bg-primary/20 border border-primary text-primary px-3 py-1 rounded-md font-bold text-xs hover:bg-primary hover:text-black transition-all">Quick Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Product 3 - Tutankhamun Mask -->
+                            <div class="gold-border-gradient bg-new-kingdom relative rounded-xl overflow-hidden group">
+                                <div class="aspect-square flex items-center justify-center p-6">
+                                    <img alt="Tutankhamun Mask" class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXndPOPMBscbj2Uggx2d84e_uqIXEkQdnuWCJCcMnYdRHm_wDFBklNL-zv4jW25fx6S3yepWzUOn696AJKdvDsz-GxNDAvetvL5u5vMoHhtedkdPvM3TwVSTD_phbeKcwZpqnUN1kRCsG0q8sXByYZU2pG5kMWc0MF4WofSpU2NrYaizAB5GMfxRaE8G9nsBgNkbnf2lKkfsejt12tPF253z2Ibq_QM21jPYOcSf8_XMZ2Eq3BsYyzM5zhDwLpVHsTBOpWUVlQefMd">
+                                </div>
+                                <div class="product-card-overlay absolute inset-0 flex flex-col justify-end p-4">
+                                    <h4 class="text-white font-bold text-sm">Tutankhamun Mask</h4>
+                                    <p class="text-slate-400 text-xs mb-3">قناع توت عنخ آمون</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-primary font-black text-sm">12,000 EGP</span>
+                                        <button class="bg-primary/20 border border-primary text-primary px-3 py-1 rounded-md font-bold text-xs hover:bg-primary hover:text-black transition-all">Quick Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Summary Section -->
+                <div class="lg:col-span-4">
+                    <div class="sticky top-28 gold-border-gradient bg-stone-950 p-8 rounded-xl shadow-2xl">
+                        <h3 class="text-xl font-bold text-white mb-1">Order Summary</h3>
+                        <p class="text-primary text-sm mb-8">ملخص الطلب</p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex justify-between items-center text-slate-400">
+                                <span>Subtotal / المجموع الفرعي</span>
+                                <span id="subtotal" class="text-white font-semibold">0 EGP</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center text-slate-400">
+                                <span class="flex items-center gap-2">
+                                    Royal Delivery / الشحن الملكي
+                                    <span class="material-symbols-outlined text-sm cursor-help">info</span>
+                                </span>
+                                <span class="text-primary font-semibold">FREE</span>
+                            </div>
+                            
+                            <div class="border-t border-primary/20 pt-4 mt-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white text-lg font-bold">Grand Total / الإجمالي</span>
+                                    <span id="total" class="text-primary text-3xl font-black">0 EGP</span>
+                                </div>
+                                <p class="text-[10px] text-slate-500 mt-1 text-right italic">Vat Included where applicable</p>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-primary hover:bg-white text-black py-4 rounded-lg font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(236,182,19,0.3)]">
+                            <span class="material-symbols-outlined">lock</span>
+                            PROCEED TO SECURE CHECKOUT / إتمام عملية الدفع
+                        </button>
+                        
+                        <div class="mt-8 pt-8 border-t border-primary/10 flex flex-col items-center gap-4">
+                            <div class="flex gap-4 opacity-50 grayscale hover:grayscale-0 transition-all">
+                                <img alt="Visa" class="h-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBof3xRi0oml3JUTlR1m2zEqf-UiYiY85vYl1b6ba_Zywig5e1Yo4hFzhZ08X4Is1S4Drdwtg1dGF1V2vsxjyJvxZllzfUat89qMn7S0fhIlkgJ1ZOcEfb7lRueaLv2NsUUctzHMdLr_35V8Tgoas-xeij3oIvg2cgcX-pW_T5PLrx5Kr-kNCyIP71QjG3TPuRxUzoDwadfBuK29FiCkBhGumXpn6v-gHN9S6V_0Bj0L2MqmXp7KfejF2iBdyMbXsXvdTRgaJ1XgBLC">
+                                <img alt="Mastercard" class="h-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsatcEmsWogCERQoez2jgMTrLecUQM8FWrp2RvebKVe_n2_OQqRc5iLXsJ1qdFTi7dgikpFIGGpr9noNlBGL5QHKLrdmHo-sN4KoqC17ztRxzO93irVL42hAg0Y7pgvdTRqK7pFWmrwU7zjFzq1I3qLbExKoMlHkX_rTOINSvZvK3Whk4FvEHtITfeG_xHngalktQNRoAqn4QS4jfwsQgwfqGfn4k0ss1opxJekp9AXsW0qBg6h0vqUCgp-J2gV1UlVrVCUW22MwHO">
+                                <img alt="Paypal" class="h-4 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAfspBzneCQwQJcL5x5lb91jwJpyJdyDR7TE8VrTXuigE_vNKKzWi_rqngknKb-ygNGGNU2H6j54D4XJ_S7NzetfNLHlgfoHfZWyxobsMru072vjGLzAJkG-Z5czIQaIufDnCEd6vJ5DhPyzbPiObAViM7caj4X0MCO2-pmgj3uKFcybQfh8hnLAhyWNuvGpJ1THd-_X6oagQfMsX6RdbbJPiE6gdpcVRR7cW8tqhTC7kc-4y-57QpKmgqP5qJLzlAvrvFBRXkfyVL">
+                            </div>
+                            <p class="text-[10px] text-slate-600 font-medium">Guaranteed safe &amp; secure checkout</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="w-full border-t border-slate-200 dark:border-[#393528] py-8 px-10 bg-background-dark mt-20">
+            <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 opacity-60">
+                <p class="text-sm">© 2024 Royal Heritage Museum Cairo. All Rights Reserved.</p>
+                <div class="flex gap-6 text-white/80">
+                    <a class="text-xs hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                    <a class="text-xs hover:text-primary transition-colors" href="#">Terms of Service</a>
+                    <a class="text-xs hover:text-primary transition-colors" href="#">Contact Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+async function loadCart() {
+    try {
+       // const res = await fetch("https://egyptdiscover.runasp.net/api/Cart/MyCart");
+       // const data = await res.json();
+            const token = localStorage.getItem("token");
+        
+            if (!token) {
+                showToast("لازم تعمل تسجيل دخول الأول ❌", "error");
+                window.location.href = "./Authentication/Signin.html";
+                return;
+            }
+
+            const res = await fetch("https://egyptdiscover.runasp.net/api/Cart/MyCart", {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            });
+
+            const data = await res.json();
+                console.log(data.items);
+
+
+        const container = document.getElementById("cart-items");
+
+        if (!data.items || data.items.length === 0) {
+            container.innerHTML = "<p class='text-white'>Cart is empty</p>";
+            document.getElementById("subtotal").textContent = "0 EGP";
+            document.getElementById("total").textContent = "0 EGP";
+            return;
+        }
+
+        let subtotal = 0;
+
+        container.innerHTML = data.items.map(item => `
+        
+        <div class="flex gap-6 p-4 rounded-xl gold-border-gradient bg-stone-950/40 relative group">
+            
+            <div class="w-32 h-40 lg:w-40 lg:h-52 rounded-lg overflow-hidden flex-shrink-0 relative">
+                <img src="https://egyptdiscover.runasp.net${item.imageUrl || ''}" 
+                        class="w-full h-full object-contain p-2">
+            </div>
+
+            <div class="flex flex-col justify-between flex-1 py-1">
+
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">${item.productName}</h3>
+                    </div>
+
+                    <button onclick="removeItem(${item.productId})"
+                        class="text-slate-500 hover:text-red-500">🗑</button>
+                </div>
+
+                <div class="flex items-end justify-between">
+
+                    <div class="flex items-center gap-4 bg-black/40 border border-primary/20 rounded-full p-1 px-3">
+                        
+                        <button onclick="decrease(${item.productId})">-</button>
+
+                        <span class="text-white font-bold w-4 text-center">
+                            ${item.quantity}
+                        </span>
+
+                        <button onclick="increase(${item.productId})">+</button>
+
+                    </div>
+
+                    <div class="text-right">
+                        <p class="text-2xl font-black text-primary">
+                                ${Number(item.totalPrice) || 0} EGP
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        `).join("");
+
+        data.items.forEach(item => {
+        subtotal += Number(item.totalPrice) || 0;
+        });
+
+        document.getElementById("subtotal").textContent = subtotal + " EGP";
+        document.getElementById("total").textContent = subtotal + " EGP";
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+    loadCart();
+
+    // زر اضافة كمية العداد
+    async function increase(id) {
+
+        const token = localStorage.getItem("token");
+
+        await fetch(`https://egyptdiscover.runasp.net/api/Cart/add-item-to-cart?productId=${id}&quantity=1`, {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        loadCart(); // refresh
+    }
+
+    // زر تقليل كمية العداد
+function decrease(id) {
+
+    const container = document.getElementById("cart-items");
+
+    const itemDiv = [...container.children].find(div =>
+        div.innerHTML.includes(`decrease(${id})`)
+    );
+
+    if (!itemDiv) return;
+
+    const qtySpan = itemDiv.querySelector("span");
+    let quantity = Number(qtySpan.textContent);
+
+    // لو 1 → احذف المنتج
+    if (quantity <= 1) {
+        itemDiv.remove();
+        updateTotals();
+        return;
+    }
+
+    // نقص الكمية
+    quantity--;
+    qtySpan.textContent = quantity;
+
+    // حدث السعر
+    const priceElement = itemDiv.querySelector(".text-primary");
+    const unitPrice = Number(priceElement.textContent.replace("EGP", "")) / (quantity + 1);
+
+    priceElement.textContent = (unitPrice * quantity) + " EGP";
+
+    updateTotals();
+}
+/////////////////// تحديث الأسعار بعد أي تغيير في الكمية
+function updateTotals() {
+
+    const items = document.querySelectorAll("#cart-items > div");
+
+    let subtotal = 0;
+
+    items.forEach(item => {
+        const priceText = item.querySelector(".text-primary").textContent;
+        const price = Number(priceText.replace("EGP", ""));
+        subtotal += price;
+    });
+
+    document.getElementById("subtotal").textContent = subtotal + " EGP";
+    document.getElementById("total").textContent = subtotal + " EGP";
+}
+
+// زر حذف المنتج من السلة
+async function removeItem(id) {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        showToast("لازم تعمل تسجيل دخول ❌");
+        return;
+    }
+
+    try {
+        const res = await fetch(`https://egyptdiscover.runasp.net/api/Cart/remove-item-from-cart?productId=${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        if (!res.ok) {
+            const text = await res.text();
+            console.log(text);
+            showToast("حصل خطأ في الحذف ❌", "error");
+            return;
+        }
+
+        showToast("تم الحذف من السلة ✅");
+        loadCart(); // 🔥 أهم سطر علشان يحدث الصفحة
+
+    } catch (err) {
+        console.error(err);
+        showToast("مشكلة في الاتصال ❌");
+    }
+
+    //loadCart();
+}
+
+// الاشعارات
+function showToast(message, type = "success") {
+
+    const container = document.getElementById("toast-container");
+
+    const toast = document.createElement("div");
+
+    const styles = {
+        success: "border-primary/40",
+        error: "border-red-500/40",
+        info: "border-blue-500/40"
+    };
+
+    toast.className = `
+        backdrop-blur-xl bg-white/5 dark:bg-black/30
+        border ${styles[type]}
+        text-white px-6 py-4 rounded-xl shadow-2xl
+        flex items-center gap-3 min-w-[280px]
+        transform -translate-y-10 opacity-0 scale-95
+        transition-all duration-500 ease-out
+    `;
+
+    toast.innerHTML = `
+        <span class="material-symbols-outlined text-primary text-xl">
+            ${type === "success" ? "check_circle" : type === "error" ? "error" : "info"}
+        </span>
+        <span class="text-sm font-semibold tracking-wide">${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    // دخول ناعم
+    setTimeout(() => {
+        toast.classList.remove("-translate-y-10", "opacity-0", "scale-95");
+    }, 100);
+
+    // خروج
+    setTimeout(() => {
+        toast.classList.add("-translate-y-10", "opacity-0", "scale-95");
+
+        setTimeout(() => {
+            toast.remove();
+        }, 400);
+
+    }, 3000);
+}
+    </script>
+    <div id="toast-container" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3"></div>
+</body>
+</html>
